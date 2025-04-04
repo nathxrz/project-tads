@@ -20,8 +20,8 @@ public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime date_time_start;
-    private LocalDateTime date_time_end;
+    private LocalDateTime dateTimeStart;
+    private LocalDateTime dateTimeEnd;
     private String Status;
 
     @ManyToOne
