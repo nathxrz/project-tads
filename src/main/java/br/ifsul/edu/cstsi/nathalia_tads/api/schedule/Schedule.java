@@ -32,4 +32,65 @@ public class Schedule {
     @JoinColumn(name = "catsitter_id", referencedColumnName = "id", nullable = false)
     private Catsitter catsitter;
 
+    public Schedule() {
+    }
+
+    public Schedule(Long id, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String status, Tutor tutor, Catsitter catsitter) {
+        this.id = id;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        Status = status;
+        this.tutor = tutor;
+        this.catsitter = catsitter;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public LocalDateTime getDateTimeStart() {
+        return dateTimeStart;
+    }
+
+    public void setDateTimeStart(LocalDateTime dateTimeStart) {
+        this.dateTimeStart = dateTimeStart;
+    }
+
+    public LocalDateTime getDateTimeEnd() {
+        return dateTimeEnd;
+    }
+
+    public void setDateTimeEnd(LocalDateTime dateTimeEnd) {
+        this.dateTimeEnd = dateTimeEnd;
+    }
+
+    public String getStatus() {
+        return Status;
+    }
+
+    public void setStatus(String status) {
+        Status = status;
+    }
+
+    public Tutor getTutor() {
+        return tutor;
+    }
+
+    public void setTutor(Tutor tutor) {
+        this.tutor = tutor;
+    }
+
+    public Catsitter getCatsitter() {
+        return catsitter;
+    }
+
+    public void setCatsitter(Catsitter catsitter) {
+        this.catsitter = catsitter;
+    }
+
+
 }
