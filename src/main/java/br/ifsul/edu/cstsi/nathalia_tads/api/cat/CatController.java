@@ -5,6 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -43,6 +44,8 @@ public class CatController {
                 ResponseEntity.noContent().build() :
                 ResponseEntity.ok(cats.stream().map(CatDTOResponse::new).toList());
     }
+
+    @Secured("ROLE_ADMIN")
     @PostMapping
     public ResponseEntity<URI> insert(@RequestBody CatDTOPost catDTO, UriComponentsBuilder uriBuilder) {
         var tutor = tutorRepository.findById(catDTO.tutorId());

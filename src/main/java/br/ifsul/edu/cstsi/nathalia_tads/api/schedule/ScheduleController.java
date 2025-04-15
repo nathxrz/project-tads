@@ -3,6 +3,7 @@ package br.ifsul.edu.cstsi.nathalia_tads.api.schedule;
 import br.ifsul.edu.cstsi.nathalia_tads.api.catsitter.CatsitterRepository;
 import br.ifsul.edu.cstsi.nathalia_tads.api.tutor.TutorRepository;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -33,6 +34,7 @@ public class ScheduleController {
     }
 
     @PostMapping
+    @Secured("ROLE_ADMIN")
     public ResponseEntity<URI> insert(@RequestBody ScheduleDTOPost scheduleDTO, UriComponentsBuilder uriBuilder) {
         var tutor = tutorRepository.findById(scheduleDTO.tutor_id());
 
