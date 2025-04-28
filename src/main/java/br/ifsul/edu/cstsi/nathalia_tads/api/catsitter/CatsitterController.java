@@ -49,24 +49,13 @@ public class CatsitterController {
     @PostMapping
     @Secured("ROLE_ADMIN")
     public ResponseEntity<URI> insert(@RequestBody CatsitterDTOPost catsitterDTO, UriComponentsBuilder uriBuilder) {
-        List<Long> scheduleIds = catsitterDTO.schedules().stream()
-                .map(Schedule::getId)
-                .collect(Collectors.toList());
-
-        List<Schedule> schedules = scheduleRepository.findAllById(scheduleIds);
-
-        if(schedules.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
 
         var catsitter = catsitterRepository.save(new Catsitter(
-                null,
                 catsitterDTO.name(),
                 catsitterDTO.birthday(),
                 catsitterDTO.phone(),
                 catsitterDTO.gender(),
-                catsitterDTO.email(),
-                schedules
+                catsitterDTO.email()
         ));
         var location = uriBuilder.path("api/v1/catsitters/{id}").buildAndExpand(catsitter.getId()).toUri();
         return ResponseEntity.created(location).build();
@@ -74,15 +63,6 @@ public class CatsitterController {
 
     @PutMapping("{id}")
     public ResponseEntity<CatsitterDTOResponse> update(@PathVariable("id") Long id, @RequestBody CatsitterDTOPut catsitterDTO) {
-        List<Long> scheduleIds = catsitterDTO.schedules().stream()
-                .map(Schedule::getId)
-                .collect(Collectors.toList());
-
-        List<Schedule> schedules = scheduleRepository.findAllById(scheduleIds);
-
-        if(schedules.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
 
         var catsitter = catsitterRepository.findById(id);
         if (catsitter.isPresent()) {
@@ -92,8 +72,7 @@ public class CatsitterController {
                     catsitterDTO.birthday(),
                     catsitterDTO.phone(),
                     catsitterDTO.gender(),
-                    catsitterDTO.email(),
-                    schedules
+                    catsitterDTO.email()
             ));
             return ResponseEntity.ok(new CatsitterDTOResponse(c));
         }

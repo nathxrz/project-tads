@@ -8,21 +8,22 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "tutors")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
 
 public class Tutor {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private LocalDateTime birthday;
+    private LocalDate birthday;
     private String gender;
     private String phone;
     private String email;
@@ -37,7 +38,7 @@ public class Tutor {
     public Tutor() {
     }
 
-    public Tutor(Long id, String name, LocalDateTime birthday, String gender, String phone, String email, String address, List<Cat> cats, List<Schedule> schedules) {
+    public Tutor(Long id, String name, LocalDate birthday, String gender, String phone, String email, String address, List<Cat> cats, List<Schedule> schedules) {
         this.id = id;
         this.name = name;
         this.birthday = birthday;
@@ -49,60 +50,31 @@ public class Tutor {
         this.schedules = schedules;
     }
 
-    public List<Schedule> getSchedules() {
-        return schedules;
-    }
-
-    public void setSchedules(List<Schedule> schedules) {
-        this.schedules = schedules;
-    }
-
-    public List<Cat> getCats() {
-        return cats;
-    }
-
-    public void setCats(List<Cat> cats) {
-        this.cats = cats;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
+    public Tutor(String name, LocalDate birthday, String gender, String phone, String email, String address) {
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
         this.address = address;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
-    public String getGender() {
-        return gender;
-    }
-
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
-
-    public LocalDateTime getBirthday() {
-        return birthday;
-    }
-
-    public void setBirthday(LocalDateTime birthday) {
+    public Tutor(Long id, String name, LocalDate birthday, String gender, String phone, String email, String address) {
+        this.id = id;
+        this.name = name;
         this.birthday = birthday;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+        this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -113,11 +85,59 @@ public class Tutor {
         this.name = name;
     }
 
-    public Long getId() {
-        return id;
+    public LocalDate getBirthday() {
+        return birthday;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setBirthday(LocalDate birthday) {
+        this.birthday = birthday;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public List<Cat> getCats() {
+        return cats;
+    }
+
+    public void setCats(List<Cat> cats) {
+        this.cats = cats;
+    }
+
+    public List<Schedule> getSchedules() {
+        return schedules;
+    }
+
+    public void setSchedules(List<Schedule> schedules) {
+        this.schedules = schedules;
     }
 }

@@ -57,36 +57,14 @@ public class TutorController {
     @PostMapping
     @Secured("ROLE_ADMIN")
     public ResponseEntity<URI> insert(@RequestBody TutorDTOPost tutorDTO, UriComponentsBuilder uriBuilder) {
-        List<Long> scheduleIds = tutorDTO.schedules().stream()
-                .map(Schedule::getId)
-                .collect(Collectors.toList());
-
-        List<Schedule> schedules = scheduleRepository.findAllById(scheduleIds);
-
-        if(schedules.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        List<Long> catsIds = tutorDTO.cats().stream()
-                .map(Cat::getId)
-                .collect(Collectors.toList());
-
-        List<Cat> cats = catRepository.findAllById(catsIds);
-
-        if(cats.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
 
         var tutor = tutorRepository.save(new Tutor(
-                null,
                 tutorDTO.name(),
                 tutorDTO.birthday(),
                 tutorDTO.phone(),
                 tutorDTO.gender(),
                 tutorDTO.email(),
-                tutorDTO.address(),
-                cats,
-                schedules
+                tutorDTO.address()
         ));
         var location = uriBuilder.path("api/v1/tutors/{id}").buildAndExpand(tutor.getId()).toUri();
         return ResponseEntity.created(location).build();
@@ -94,25 +72,6 @@ public class TutorController {
 
     @PutMapping("{id}")
     public ResponseEntity<TutorDTOResponse> update(@PathVariable("id") Long id, @RequestBody TutorDTOPut tutorDTO) {
-        List<Long> scheduleIds = tutorDTO.schedules().stream()
-                .map(Schedule::getId)
-                .collect(Collectors.toList());
-
-        List<Schedule> schedules = scheduleRepository.findAllById(scheduleIds);
-
-        if(schedules.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        List<Long> catsIds = tutorDTO.cats().stream()
-                .map(Cat::getId)
-                .collect(Collectors.toList());
-
-        List<Cat> cats = catRepository.findAllById(catsIds);
-
-        if(cats.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
 
         var tutor = tutorRepository.findById(id);
         if (tutor.isPresent()) {
@@ -123,9 +82,7 @@ public class TutorController {
                     tutorDTO.phone(),
                     tutorDTO.gender(),
                     tutorDTO.email(),
-                    tutorDTO.address(),
-                    cats,
-                    schedules
+                    tutorDTO.address()
             ));
             return ResponseEntity.ok(new TutorDTOResponse(c));
         }

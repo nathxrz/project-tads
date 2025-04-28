@@ -35,6 +35,18 @@ public class Cat {
         this.tutor = tutor;
     }
 
+    public Cat(Long id, String name, String breed) {
+        this.id = id;
+        this.name = name;
+        this.breed = breed;
+    }
+
+    public Cat(String name, String breed, Tutor tutor) {
+        this.name = name;
+        this.breed = breed;
+        this.tutor = tutor;
+    }
+
     public Long getId() {
         return id;
     }

@@ -9,11 +9,9 @@ public record ScheduleDTOPut(
         LocalDateTime dateTimeStart,
         @NotBlank(message = "A data/hora de término não pode ser vazia")
         LocalDateTime dateTimeEnd,
-        String status,
-        Long tutor_id,
-        Long catsitter_id
+        String status
 ){
     public ScheduleDTOPut(Schedule schedule) {
-        this(schedule.getDateTimeStart(), schedule.getDateTimeEnd(), schedule.getStatus(), schedule.getTutor().getId(), schedule.getCatsitter().getId());
+        this(schedule.getDateTimeStart(), schedule.getDateTimeEnd(), schedule.getStatus());
     }
 }

@@ -49,7 +49,6 @@ public class ScheduleController {
         }
 
         var schedule = scheduleRepository.save(new Schedule(
-                null,
                 scheduleDTO.dateTimeStart(),
                 scheduleDTO.dateTimeEnd(),
                 scheduleDTO.status(),
@@ -62,17 +61,6 @@ public class ScheduleController {
 
     @PutMapping("{id}")
     public ResponseEntity<ScheduleDTOResponse> update(@PathVariable("id") Long id, @RequestBody ScheduleDTOPut scheduleDTO) {
-        var tutor = tutorRepository.findById(scheduleDTO.tutor_id());
-
-        if(tutor.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
-
-        var catsitter = catsitterRepository.findById(scheduleDTO.catsitter_id());
-
-        if(catsitter.isEmpty()) {
-            return ResponseEntity.notFound().build();
-        }
 
         var schedule = scheduleRepository.findById(id);
         if (schedule.isPresent()) {
@@ -80,9 +68,7 @@ public class ScheduleController {
                     id,
                     scheduleDTO.dateTimeStart(),
                     scheduleDTO.dateTimeEnd(),
-                    scheduleDTO.status(),
-                    tutor.get(),
-                    catsitter.get()
+                    scheduleDTO.status()
             ));
             return ResponseEntity.ok(new ScheduleDTOResponse(s));
         }

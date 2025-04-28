@@ -55,7 +55,6 @@ public class CatController {
         }
 
         var cat = catRepository.save(new Cat(
-                null,
                 catDTO.name(),
                 catDTO.breed(),
                 tutor.get()
@@ -71,8 +70,7 @@ public class CatController {
             var c = catRepository.save(new Cat(
                     id,
                     catDTO.name(),
-                    catDTO.breed(),
-                    cat.get().getTutor()
+                    catDTO.breed()
             ));
             return ResponseEntity.ok(new CatDTOResponse(c));
         }

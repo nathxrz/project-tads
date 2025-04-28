@@ -3,13 +3,14 @@ package br.ifsul.edu.cstsi.nathalia_tads.api.tutor;
 import br.ifsul.edu.cstsi.nathalia_tads.api.cat.Cat;
 import br.ifsul.edu.cstsi.nathalia_tads.api.schedule.Schedule;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
 public record TutorDTOResponse (
         Long id,
         String name,
-        LocalDateTime birthday,
+        LocalDate birthday,
         String gender,
         String phone,
         String email,

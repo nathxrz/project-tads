@@ -16,10 +16,9 @@ public record CatsitterDTOPost(
         String gender,
         @NotBlank(message = "O e-mail não pode estar vazio")
         @Size(min = 3, max = 50, message = "O e-mail deve ter entre 2 e 20 caracteres")
-        String email,
-        List<Schedule> schedules
+        String email
 ){
     public CatsitterDTOPost(Catsitter catsitter) {
-        this(catsitter.getName(), catsitter.getBirthday(), catsitter.getPhone(), catsitter.getGender(), catsitter.getEmail(), catsitter.getSchedules());
+        this(catsitter.getName(), catsitter.getBirthday(), catsitter.getPhone(), catsitter.getGender(), catsitter.getEmail());
     }
 }

@@ -12,17 +12,17 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "schedules")
-@NoArgsConstructor
-@AllArgsConstructor
-@Getter
-@Setter
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Getter
+//@Setter
 public class Schedule {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private LocalDateTime dateTimeStart;
     private LocalDateTime dateTimeEnd;
-    private String Status;
+    private String status;
 
     @ManyToOne
     @JoinColumn(name = "tutor_id", referencedColumnName = "id", nullable = false)
@@ -39,9 +39,24 @@ public class Schedule {
         this.id = id;
         this.dateTimeStart = dateTimeStart;
         this.dateTimeEnd = dateTimeEnd;
-        Status = status;
+        this.status = status;
         this.tutor = tutor;
         this.catsitter = catsitter;
+    }
+
+    public Schedule(LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String status, Tutor tutor, Catsitter catsitter) {
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.status = status;
+        this.tutor = tutor;
+        this.catsitter = catsitter;
+    }
+
+    public Schedule(Long id, LocalDateTime dateTimeStart, LocalDateTime dateTimeEnd, String status) {
+        this.id = id;
+        this.dateTimeStart = dateTimeStart;
+        this.dateTimeEnd = dateTimeEnd;
+        this.status = status;
     }
 
     public Long getId() {
@@ -69,11 +84,11 @@ public class Schedule {
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
     public Tutor getTutor() {
@@ -91,6 +106,5 @@ public class Schedule {
     public void setCatsitter(Catsitter catsitter) {
         this.catsitter = catsitter;
     }
-
 
 }

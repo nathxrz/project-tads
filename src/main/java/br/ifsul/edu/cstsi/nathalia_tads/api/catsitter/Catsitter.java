@@ -42,6 +42,23 @@ public class Catsitter {
         this.schedules = schedules;
     }
 
+    public Catsitter(String name, LocalDate birthday, String gender, String phone, String email) {
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+    }
+
+    public Catsitter(Long id, String name, LocalDate birthday, String gender, String phone, String email) {
+        this.id = id;
+        this.name = name;
+        this.birthday = birthday;
+        this.gender = gender;
+        this.phone = phone;
+        this.email = email;
+    }
+
     public Long getId() {
         return id;
     }
