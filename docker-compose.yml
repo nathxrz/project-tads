@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mariadb:
+    image: mariadb:latest
+    container_name: mariadb_container
+    environment:
+      MYSQL_ROOT_PASSWORD: mariadb
+      MYSQL_DATABASE: nathalia_tads  # Nome do banco de dados
+      MYSQL_USER: mariadb           # Usuário para acesso
+      MYSQL_PASSWORD: mariadb      # Senha para o usuário
+    ports:
+      - "3306:3306"  # Porta exposta para acesso
+    volumes:
+      - mariadb_data:/var/lib/mysql  # Volume persistente para os dados
+
+volumes:
+  mariadb_data:
+    driver: local
